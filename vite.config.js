@@ -1,14 +1,11 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-
-// ВАЖНО: замени на название своего репозитория!
-const repoName = 'flakomarket'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
 
 export default defineConfig({
   plugins: [vue()],
-  base: `/${repoName}/`,
+  base: "/flakomarket/", // ← ДОЛЖНО совпадать с названием репо!
   build: {
-    outDir: 'dist',
-    assetsDir: 'assets'
-  }
-})
+    outDir: "dist",
+    assetsDir: "assets",
+  },
+});
