@@ -1,20 +1,24 @@
 import { reactive } from "vue";
 
+// Реактивное состояние локали
 export const locale = reactive({
-  current: "ru",
+  current: localStorage.getItem("appLanguage") || "ru",
 });
 
+// Словарь переводов
 export const translations = {
   ru: {
+    // Навигация
     nav: {
       home: "Главная",
       profile: "Профиль",
       sell: "Продать",
     },
 
+    // Главная
     home: {
       welcome: "Добро пожаловать в",
-      projectName: "FlakoMarket", // ← ИЗМЕНЕНО
+      projectName: "FlakoMarket",
       description:
         "Безопасная платформа для торговли цифровыми активами и Telegram Stars. Покупайте, продавайте и управляйте своими средствами с легкостью.",
       stats: {
@@ -53,9 +57,10 @@ export const translations = {
       },
     },
 
+    // Профиль
     profile: {
-      title: "Профиль",
-      edit: "Редактировать",
+      title: "Настройки",
+      themeTitle: "Тема оформления",
       reviews: "Мои отзывы",
       reviewsEmpty: "Ссылка не указана",
       settings: {
@@ -76,9 +81,9 @@ export const translations = {
           value: "Правовая информация",
         },
       },
-      logout: "Выйти из аккаунта",
     },
 
+    // Редактирование профиля
     editProfile: {
       title: "Редактировать профиль",
       name: "Имя",
@@ -89,6 +94,7 @@ export const translations = {
       cancel: "Отмена",
     },
 
+    // Пополнение
     pay: {
       title: "Пополнение",
       titleGradient: "баланса",
@@ -100,6 +106,7 @@ export const translations = {
       quickAmounts: "Быстрый выбор",
     },
 
+    // Вывод
     withdraw: {
       title: "Вывод",
       titleGradient: "средств",
@@ -111,6 +118,7 @@ export const translations = {
       quickAmounts: "Быстрый выбор",
     },
 
+    // Продажа
     sell: {
       title: "Создать",
       titleGradient: "объявление",
@@ -135,6 +143,7 @@ export const translations = {
       submit: "Создать объявление",
     },
 
+    // Модалки
     modals: {
       success: {
         title: "Объявление создано!",
@@ -149,15 +158,17 @@ export const translations = {
   },
 
   en: {
+    // Navigation
     nav: {
       home: "Home",
       profile: "Profile",
       sell: "Sell",
     },
 
+    // Home
     home: {
       welcome: "Welcome to",
-      projectName: "FlakoMarket", // ← ИЗМЕНЕНО
+      projectName: "FlakoMarket",
       description:
         "Secure platform for trading digital assets and Telegram Stars. Buy, sell and manage your funds with ease.",
       stats: {
@@ -196,9 +207,10 @@ export const translations = {
       },
     },
 
+    // Profile
     profile: {
-      title: "Profile",
-      edit: "Edit",
+      title: "Settings",
+      themeTitle: "Theme",
       reviews: "My Reviews",
       reviewsEmpty: "Link not set",
       settings: {
@@ -219,9 +231,9 @@ export const translations = {
           value: "Legal information",
         },
       },
-      logout: "Log out",
     },
 
+    // Edit Profile
     editProfile: {
       title: "Edit Profile",
       name: "Name",
@@ -232,6 +244,7 @@ export const translations = {
       cancel: "Cancel",
     },
 
+    // Pay
     pay: {
       title: "Top Up",
       titleGradient: "Balance",
@@ -243,6 +256,7 @@ export const translations = {
       quickAmounts: "Quick Select",
     },
 
+    // Withdraw
     withdraw: {
       title: "Withdraw",
       titleGradient: "Funds",
@@ -254,6 +268,7 @@ export const translations = {
       quickAmounts: "Quick Select",
     },
 
+    // Sell
     sell: {
       title: "Create",
       titleGradient: "listing",
@@ -278,6 +293,7 @@ export const translations = {
       submit: "Create Listing",
     },
 
+    // Modals
     modals: {
       success: {
         title: "Listing Created!",
@@ -292,10 +308,13 @@ export const translations = {
   },
 };
 
+// Переключение языка
 export const toggleLanguage = () => {
   locale.current = locale.current === "ru" ? "en" : "ru";
+  localStorage.setItem("appLanguage", locale.current);
 };
 
+// Получение перевода по ключу
 export const t = (key) => {
   const keys = key.split(".");
   let value = translations[locale.current];

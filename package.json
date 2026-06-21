@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/sendox2012-debug/flakomarlet",
+    "homepage": "https://sendox2012-debug.github.io/flakomarket",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

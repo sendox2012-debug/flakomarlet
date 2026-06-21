@@ -1,48 +1,43 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
+import { useTheme } from "./composables/useTheme.js";
 import TabBar from "./components/TabBar.vue";
 import EditProfileModal from "./components/EditProfileModal.vue";
 import SuccessModal from "./components/SuccessModal.vue";
 import TermsModal from "./components/TermsModal.vue";
 
+// Инициализация темы
+const { currentTheme } = useTheme();
+
 const route = useRoute();
 
-// Состояние модалок
 const showSuccessModal = ref(false);
 const showTermsModal = ref(false);
 const showEditProfileModal = ref(false);
 
-// Данные пользователя
 const userData = ref({
     name: "",
     username: "",
     reviewsLink: "",
 });
 
-// Показывать таб-бар только на основных страницах
 const showTabBar = computed(() => {
     return ["/", "/profile", "/sell"].includes(route.path);
 });
 
-// Обработка создания объявления
 const handleCreateListing = (formData) => {
     console.log("📦 Новое объявление:", formData);
     showSuccessModal.value = true;
 };
 
-// Открытие условий использования
 const handleOpenTerms = () => {
     showTermsModal.value = true;
 };
-
-// Открытие редактирования профиля
 const handleOpenEditProfile = (user) => {
     userData.value = user;
     showEditProfileModal.value = true;
 };
-
-// Сохранение данных профиля
 const handleSaveProfile = (newUser) => {
     userData.value = newUser;
     localStorage.setItem("userData", JSON.stringify(newUser));
@@ -51,7 +46,6 @@ const handleSaveProfile = (newUser) => {
 
 <template>
     <div class="app-container">
-        <!-- Основной контент через router-view -->
         <main class="content">
             <router-view
                 @openTerms="handleOpenTerms"
@@ -60,10 +54,8 @@ const handleSaveProfile = (newUser) => {
             />
         </main>
 
-        <!-- Floating Tab Bar (показывается только на основных страницах) -->
         <TabBar v-if="showTabBar" />
 
-        <!-- Модальные окна -->
         <EditProfileModal
             v-model="showEditProfileModal"
             :userData="userData"
@@ -79,6 +71,7 @@ const handleSaveProfile = (newUser) => {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+    background: var(--bg-primary);
 }
 
 .content {

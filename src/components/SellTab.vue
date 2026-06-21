@@ -12,15 +12,18 @@ const form = reactive({
 });
 
 const handleSubmit = () => {
-    const formData = { ...form };
+    if (!form.title || !form.description || !form.price) return;
 
+    const formData = { ...form };
     emit("submit", formData);
 
+    // Очистка формы
     form.title = "";
     form.description = "";
     form.price = "";
     form.currency = "USDT";
 
+    // Haptic feedback
     if (window.Telegram?.WebApp?.HapticFeedback) {
         window.Telegram.WebApp.HapticFeedback.notificationOccurred("success");
     }
@@ -29,6 +32,7 @@ const handleSubmit = () => {
 
 <template>
     <div class="sell-tab">
+        <!-- Заголовок -->
         <div class="header">
             <h1 class="header-title">
                 {{ t("sell.title") }}
@@ -37,7 +41,9 @@ const handleSubmit = () => {
             <p class="header-subtitle">{{ t("sell.subtitle") }}</p>
         </div>
 
+        <!-- Форма -->
         <form class="sell-form" @submit.prevent="handleSubmit">
+            <!-- Название товара -->
             <div class="form-group">
                 <label class="form-label">
                     <svg
@@ -63,6 +69,7 @@ const handleSubmit = () => {
                 />
             </div>
 
+            <!-- Описание -->
             <div class="form-group">
                 <label class="form-label">
                     <svg
@@ -88,6 +95,7 @@ const handleSubmit = () => {
                 ></textarea>
             </div>
 
+            <!-- Цена и валюта -->
             <div class="form-row">
                 <div class="form-group flex-1">
                     <label class="form-label">
@@ -149,6 +157,7 @@ const handleSubmit = () => {
                 </div>
             </div>
 
+            <!-- Кнопка отправки -->
             <button type="submit" class="submit-btn">
                 <svg
                     class="btn-icon"
@@ -167,7 +176,6 @@ const handleSubmit = () => {
 </template>
 
 <style scoped>
-/* Стили остаются такими же, как в предыдущей версии */
 .sell-tab {
     animation: fadeIn 0.4s ease;
 }
@@ -183,6 +191,7 @@ const handleSubmit = () => {
     }
 }
 
+/* Заголовок */
 .header {
     margin-bottom: 28px;
 }
@@ -191,11 +200,16 @@ const handleSubmit = () => {
     font-size: 28px;
     font-weight: 800;
     margin-bottom: 6px;
-    color: #f1f5f9;
+    color: var(--text-primary);
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, #a78bfa, #c084fc, #e879f9);
+    background: linear-gradient(
+        135deg,
+        var(--accent-1),
+        var(--accent-2),
+        var(--accent-3)
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -203,9 +217,10 @@ const handleSubmit = () => {
 
 .header-subtitle {
     font-size: 14px;
-    color: #94a3b8;
+    color: var(--text-secondary);
 }
 
+/* Форма */
 .sell-form {
     display: flex;
     flex-direction: column;
@@ -233,7 +248,7 @@ const handleSubmit = () => {
     gap: 6px;
     font-size: 14px;
     font-weight: 600;
-    color: #94a3b8;
+    color: var(--text-secondary);
 }
 
 .label-icon {
@@ -244,14 +259,14 @@ const handleSubmit = () => {
 .form-input,
 .form-textarea,
 .form-select {
-    background: rgba(30, 27, 75, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(139, 92, 246, 0.15);
+    background: var(--bg-input);
+    backdrop-filter: var(--card-blur);
+    -webkit-backdrop-filter: var(--card-blur);
+    border: 1px solid var(--border);
     border-radius: 14px;
     padding: 14px 16px;
     font-size: 15px;
-    color: #f1f5f9;
+    color: var(--text-primary);
     transition: all 0.3s ease;
     font-family: inherit;
     width: 100%;
@@ -259,16 +274,16 @@ const handleSubmit = () => {
 
 .form-input::placeholder,
 .form-textarea::placeholder {
-    color: #64748b;
+    color: var(--text-muted);
 }
 
 .form-input:focus,
 .form-textarea:focus,
 .form-select:focus {
     outline: none;
-    border-color: #8b5cf6;
-    background: rgba(139, 92, 246, 0.1);
-    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+    border-color: var(--accent-1);
+    background: var(--accent-soft);
+    box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 .form-textarea {
@@ -293,12 +308,13 @@ const handleSubmit = () => {
     transform: translateY(-50%);
     width: 18px;
     height: 18px;
-    color: #64748b;
+    color: var(--text-muted);
     pointer-events: none;
 }
 
+/* Кнопка отправки */
 .submit-btn {
-    background: linear-gradient(135deg, #8b5cf6, #c084fc);
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
     color: white;
     border: none;
     border-radius: 16px;
@@ -311,9 +327,7 @@ const handleSubmit = () => {
     justify-content: center;
     gap: 10px;
     transition: all 0.3s ease;
-    box-shadow:
-        0 8px 24px rgba(139, 92, 246, 0.4),
-        0 0 0 1px rgba(192, 132, 252, 0.2);
+    box-shadow: 0 8px 24px var(--accent-glow);
     margin-top: 8px;
     position: relative;
     overflow: hidden;

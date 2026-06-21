@@ -25,7 +25,7 @@ const handleSubmit = () => {
         return;
     }
 
-    const url = `https://t.me/flacomarketbor?start=pay_${form.amount}`;
+    const url = `https://t.me/flacomarketbot?start=pay_${form.amount}`;
 
     if (window.Telegram?.WebApp) {
         window.Telegram.WebApp.openTelegramLink(url);
@@ -176,11 +176,9 @@ const goBack = () => {
 </template>
 
 <style scoped>
-/* Стили остаются такими же, как в предыдущей версии */
 .pay-page {
     animation: fadeIn 0.4s ease;
 }
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -198,79 +196,58 @@ const goBack = () => {
     gap: 12px;
     margin-bottom: 28px;
 }
-
 .back-btn {
     width: 40px;
     height: 40px;
-    background: rgba(30, 27, 75, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(139, 92, 246, 0.15);
+    background: var(--bg-card);
+    backdrop-filter: var(--card-blur);
+    border: 1px solid var(--accent-border);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    color: #c084fc;
+    color: var(--accent-2);
     flex-shrink: 0;
-    margin-top: 4px;
 }
-
-.back-btn:active {
-    transform: scale(0.95);
-    background: rgba(139, 92, 246, 0.2);
-}
-
 .back-btn svg {
     width: 20px;
     height: 20px;
 }
-
-.header-content {
-    flex: 1;
-}
-
 .header-title {
     font-size: 28px;
     font-weight: 800;
-    margin-bottom: 6px;
-    color: #f1f5f9;
+    color: var(--text-primary);
 }
-
 .gradient-text {
-    background: linear-gradient(135deg, #a78bfa, #c084fc, #e879f9);
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
-
 .header-subtitle {
     font-size: 14px;
-    color: #94a3b8;
+    color: var(--text-secondary);
 }
 
-.pay-form {
+.pay-form,
+.withdraw-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-
 .form-group {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
-
 .form-label {
     display: flex;
     align-items: center;
     gap: 6px;
     font-size: 14px;
     font-weight: 600;
-    color: #94a3b8;
+    color: var(--text-secondary);
 }
-
 .label-icon {
     width: 16px;
     height: 16px;
@@ -281,12 +258,10 @@ const goBack = () => {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
 }
-
 .currency-option {
-    background: rgba(30, 27, 75, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(139, 92, 246, 0.15);
+    background: var(--bg-card);
+    backdrop-filter: var(--card-blur);
+    border: 1px solid var(--border);
     border-radius: 14px;
     padding: 16px;
     display: flex;
@@ -294,54 +269,36 @@ const goBack = () => {
     justify-content: center;
     gap: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    color: #94a3b8;
+    color: var(--text-secondary);
     font-size: 15px;
     font-weight: 600;
 }
-
 .currency-option.active {
-    background: linear-gradient(
-        135deg,
-        rgba(139, 92, 246, 0.2),
-        rgba(192, 132, 252, 0.2)
-    );
-    border-color: #8b5cf6;
-    color: #c084fc;
-    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
-}
-
-.currency-option:active {
-    transform: scale(0.98);
-}
-
-.currency-icon {
-    font-size: 20px;
+    background: var(--accent-soft);
+    border-color: var(--accent-1);
+    color: var(--accent-2);
+    box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 .form-input {
-    background: rgba(30, 27, 75, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(139, 92, 246, 0.15);
+    background: var(--bg-input);
+    backdrop-filter: var(--card-blur);
+    border: 1px solid var(--border);
     border-radius: 14px;
     padding: 14px 16px;
     font-size: 15px;
-    color: #f1f5f9;
-    transition: all 0.3s ease;
+    color: var(--text-primary);
     font-family: inherit;
     width: 100%;
 }
-
 .form-input::placeholder {
-    color: #64748b;
+    color: var(--text-muted);
 }
-
 .form-input:focus {
     outline: none;
-    border-color: #8b5cf6;
-    background: rgba(139, 92, 246, 0.1);
-    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+    border-color: var(--accent-1);
+    background: var(--accent-soft);
+    box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 .quick-amounts {
@@ -349,28 +306,22 @@ const goBack = () => {
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
 }
-
 .quick-amount-btn {
-    background: rgba(30, 27, 75, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(139, 92, 246, 0.15);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 12px;
     font-size: 14px;
     font-weight: 600;
-    color: #c084fc;
+    color: var(--accent-2);
     cursor: pointer;
-    transition: all 0.3s ease;
 }
-
 .quick-amount-btn:active {
-    transform: scale(0.95);
-    background: rgba(139, 92, 246, 0.2);
+    background: var(--accent-soft);
 }
 
 .submit-btn {
-    background: linear-gradient(135deg, #8b5cf6, #c084fc);
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
     color: white;
     border: none;
     border-radius: 16px;
@@ -382,15 +333,12 @@ const goBack = () => {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 8px 24px var(--accent-glow);
     margin-top: 8px;
 }
-
 .submit-btn:active {
     transform: scale(0.98);
 }
-
 .btn-icon {
     width: 20px;
     height: 20px;
