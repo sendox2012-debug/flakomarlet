@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+    height: 100%;
+    background: #0f0a1f;
+    font-family:
+        -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto,
+        sans-serif;
+    color: #f1f5f9;
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none;
+}
+
+body {
+    background: radial-gradient(ellipse at top, #1e1b4b 0%, #0f0a1f 50%);
+}
+
+.scroll-area::-webkit-scrollbar {
+    display: none;
+}
