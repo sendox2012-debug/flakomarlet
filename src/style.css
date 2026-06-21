@@ -1,13 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 html,
 body,
 #app {
@@ -20,11 +15,9 @@ body,
     -webkit-font-smoothing: antialiased;
     overscroll-behavior-y: none;
 }
-
 body {
     background: radial-gradient(ellipse at top, #1e1b4b 0%, #0f0a1f 50%);
 }
-
 .scroll-area::-webkit-scrollbar {
     display: none;
 }
